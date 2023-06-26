@@ -1,14 +1,17 @@
+package programmeServeur;
+
 import java.io.IOException;
 import java.util.Scanner;
 
-public class QuoteServer
+public class Serveur
 {
 
     public static void main(String[] args) throws IOException
     {
+        new ServeurThread().start();
 
-        new QuoteServerThread().start();
-        boolean commencer = true;
+
+        /*boolean commencer = true;
 
         while( commencer == true)
         {
@@ -17,10 +20,9 @@ public class QuoteServer
 
             if(myint == 'f')
             {
-                new QuoteServerThread().stop();
+                new ServeurThread().stop();
                 commencer = false;
             }
-        }
-
+        }*/
     }
 }
