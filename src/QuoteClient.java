@@ -32,6 +32,7 @@ public class QuoteClient
             String received = new String(packet.getData(), 0, packet.getLength());
             if (premiereQuote.equals("true"))
             {
+                String entete = "";
                 premiereQuote = new String(packet.getData(), 0, packet.getLength());
                 System.out.println("Titre: " + premiereQuote);
             }
@@ -46,7 +47,6 @@ public class QuoteClient
                 {
                     System.out.println("Quote of the Moment: " + received);
                 }
-
             }
 
             socket.close();
