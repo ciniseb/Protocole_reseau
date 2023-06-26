@@ -1,9 +1,6 @@
 package programmeServeur;
 
-import classesAuxiliaires.CoucheApplication;
-import classesAuxiliaires.CoucheLiaison;
-import classesAuxiliaires.CouchePhysique;
-import classesAuxiliaires.CoucheTransport;
+import classesAuxiliaires.*;
 
 import java.io.*;
 import java.net.*;
@@ -14,7 +11,6 @@ public class ServeurThread extends Thread
 
     /*protected DatagramSocket socket;
     protected BufferedReader in;*/
-    protected boolean execution;
 
     public ServeurThread() throws IOException
     {
@@ -26,7 +22,6 @@ public class ServeurThread extends Thread
         super(name);
 
         //socket = new DatagramSocket(25001);
-        execution = true;
 
         /*try
         {
@@ -50,8 +45,15 @@ public class ServeurThread extends Thread
         c_liaison.setProchaineCouche(c_transport);
         c_transport.setProchaineCouche(c_application);
 
-        while (execution)
+        Scanner scanner = new Scanner(System.in);
+        while (true)
         {
+            /*if (scanner.nextLine().isEmpty())
+            {
+                System.out.println("Arrêt du serveur sur demande.");
+                break;
+            }*/
+
             /*// Réception des donnees
             //TODO
             try
@@ -81,10 +83,12 @@ public class ServeurThread extends Thread
                 e.printStackTrace();
                 execution = false;
             }*/
-            //String donnees = "Données temporaires";
+
+            // Création des données à recevoir
+            Requete donnees = new Requete(null);
 
             // Envoi des données au premier maillon de la chaîne (couche physique)
-            String reponse = c_physique.traite(null);
+            String reponse = c_physique.traite(donnees);
             System.out.println(reponse);
         }
 

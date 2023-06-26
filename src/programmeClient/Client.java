@@ -1,12 +1,12 @@
 package programmeClient;
 
-import classesAuxiliaires.CoucheApplication;
-import classesAuxiliaires.CoucheLiaison;
-import classesAuxiliaires.CouchePhysique;
-import classesAuxiliaires.CoucheTransport;
+import classesAuxiliaires.*;
 
 import java.io.*;
 import java.net.*;
+
+import static classesAuxiliaires.Constantes.adresseIP_destination;
+import static classesAuxiliaires.Constantes.nom_fichier;
 
 
 public class Client
@@ -25,7 +25,7 @@ public class Client
         c_liaison.setProchaineCouche(c_physique);
 
         // Création des données à transférer
-        String donnees = "Données à transférer";
+        Requete donnees = new Requete(null);
 
         // Envoi des données au premier maillon de la chaîne (couche application)
         String reponse = c_application.traite(donnees);

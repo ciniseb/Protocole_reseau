@@ -3,5 +3,5 @@ package classesAuxiliaires;
 public interface ICouche
 {
     void setProchaineCouche(ICouche prochaine);
-    String traite(String donnees);
+    String traite(Requete donnees);
 }

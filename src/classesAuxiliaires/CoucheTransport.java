@@ -4,7 +4,7 @@ public class CoucheTransport extends Couche
 {
 
     @Override
-    public String traite(String donnees)
+    public String traite(Requete donnees)
     {
         if(prochaine_couche instanceof CoucheLiaison)
         {

@@ -9,5 +9,5 @@ public abstract class Couche implements ICouche
         prochaine_couche = prochaine;
     }
 
-    public abstract String traite(String donnees);
+    public abstract String traite(Requete donnees);
 }
