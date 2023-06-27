@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-06-27T16:06:15.385375800Z</date>
+  <millis>1687881975385</millis>
+  <nanos>375800</nanos>
+  <sequence>4</sequence>
+  <logger>classesAuxiliaires.CoucheLiaison</logger>
+  <level>INFO</level>
+  <class>classesAuxiliaires.CoucheLiaison</class>
+  <method>traite</method>
+  <thread>24</thread>
+  <message>Le serveur à reçut des données</message>
+</record>
+</log>
