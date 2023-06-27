@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 public class CoucheLiaison extends Couche
 {
-
     private static final Logger LOGGER = Logger.getLogger(CoucheLiaison.class.getName());
     int erreurCRC = 0;
     int paquetTransmit = 0;
@@ -16,10 +15,6 @@ public class CoucheLiaison extends Couche
     @Override
     public String traite(Requete donnees)
     {
-        byte[] temporaire = new byte[10];
-        temporaire.equals(10001);
-        donnees.setBytes(temporaire);
-
         if(prochaine_couche instanceof CouchePhysique)
         {
             donnees.setBytes(calculerCRC(donnees.getBytes()));
