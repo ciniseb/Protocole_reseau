@@ -38,8 +38,7 @@ public class ServeurThread extends Thread
             Requete donnees = new Requete(null);
 
             // Envoi des données au premier maillon de la chaîne (couche physique)
-            String reponse = c_physique.traite(donnees);
-            System.out.println(reponse);
+            c_physique.traite(donnees);
         }
     }
 }

@@ -23,7 +23,6 @@ public class Client
         Requete donnees = new Requete(null);
 
         // Envoi des données au premier maillon de la chaîne (couche application)
-        String reponse = c_application.traite(donnees);
-        System.out.println(reponse);
+        c_application.traite(donnees);
     }
 }

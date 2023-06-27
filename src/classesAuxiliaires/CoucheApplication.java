@@ -1,13 +1,14 @@
 package classesAuxiliaires;
 
 import java.io.*;
+import java.util.Arrays;
 
 import static classesAuxiliaires.Constantes.*;
 
 public class CoucheApplication extends Couche
 {
     @Override
-    public String traite(Requete donnees)
+    public void traite(Requete donnees)
     {
         if(prochaine_couche instanceof CoucheTransport)
         {
@@ -32,8 +33,8 @@ public class CoucheApplication extends Couche
                 throw new RuntimeException(e);
             }
 
+            System.out.println("Couche Application --> Couche Transport");
             prochaine_couche.traite(donnees);
-            return "Couche Application --> Couche Transport\n" + prochaine_couche.traite(donnees);
         }
         else if(prochaine_couche == null)
         {
@@ -49,9 +50,11 @@ public class CoucheApplication extends Couche
                 throw new RuntimeException(e);
             }
 
-            return "Couche Application --> FIN\n";
+            System.out.println("Couche Application --> FIN");
         }
-
-        return "Couche Application : traitement impossible";
+        else
+        {
+            System.err.println("Couche Application : traitement impossible");
+        }
     }
 }

@@ -1,36 +1,51 @@
 package classesAuxiliaires;
 
+import java.util.Arrays;
+
 import static classesAuxiliaires.Constantes.NB_MAX_OCTETS;
 import static classesAuxiliaires.Constantes.NOM_FICHIER;
 
 public class CoucheTransport extends Couche
 {
+    private Requete donnees_temp;
+
+    public CoucheTransport()
+    {
+        donnees_temp = new Requete(null);
+    }
 
     @Override
-    public String traite(Requete donnees)
+    public void traite(Requete donnees)
     {
         if(prochaine_couche instanceof CoucheLiaison)
         {
-            //Envoie des segments
-            traite_segments_out(donnees.getBytes());
+            System.out.println("Couche Transport --> Couche Liaison");
 
-            return "Couche Transport --> Couche Liaison\n" + prochaine_couche.traite(donnees);
+            //Envoie des segments
+            //traite_segments_out(donnees.getBytes());
+            prochaine_couche.traite(donnees);
         }
         else if(prochaine_couche instanceof CoucheApplication)
         {
+            System.out.println("Couche Transport --> Couche Application");
 
             //Réception des segments
-            traite_segments_in(donnees.getBytes());
-
-            return "Couche Transport --> Couche Application\n" + prochaine_couche.traite(donnees);
+            //traite_segments_in(donnees.getBytes());
+            prochaine_couche.traite(donnees);
         }
-
-        return "Couche Transport : traitement impossible";
+        else
+        {
+            System.err.println("Couche Transport : traitement impossible");
+        }
     }
 
     private void traite_segments_out(byte[] donnees)
     {
         int nb_segments = (int) Math.ceil((double) donnees.length / NB_MAX_OCTETS);
+
+        System.out.println(donnees.length);
+        System.out.println(nb_segments);
+
         byte[][] segments = new byte[nb_segments][];
 
         //Envoie du nom de fichier
@@ -52,15 +67,35 @@ public class CoucheTransport extends Couche
 
     private void traite_segments_in(byte[] donnees)
     {
-        if(donnees[0] == 0 && donnees[2] >= 0)
+        //System.out.println(new String(donnees));
+
+
+        if(donnees[0] == (byte) 0 && donnees[2] >= (byte) 0)
         {
-            if(donnees[1] == 0)
+            if(donnees[1] == (byte) 0)
             {
                 //TODO : récupère le nom de fichier
+                System.out.println("PASSE ICI 0");
             }
             else if(donnees[1] < donnees[2])
             {
-                prochaine_couche.traite(new Requete(new Segment(donnees).getDonnees()));
+                byte[] newArray = new byte[donnees_temp.getBytes().length + donnees.length];
+                System.arraycopy(donnees_temp.getBytes(), 0, newArray, 0, donnees_temp.getBytes().length);
+                System.arraycopy(donnees, 0, newArray, donnees_temp.getBytes().length, donnees.length);
+                donnees_temp.setBytes(newArray);
+
+                System.out.println(donnees_temp.getString());
+                System.out.println(Arrays.toString(newArray));
+                System.out.println("PASSE ICI 1,2,3,...");
+            }
+            else if(donnees[1] == donnees[2])
+            {
+                System.out.println("PASSE ICI fin");
+                prochaine_couche.traite(donnees_temp);
+
+                System.out.println(donnees_temp.getString());
+
+                donnees_temp = new Requete(null);
             }
         }
     }

@@ -4,23 +4,25 @@ public class CoucheLiaison extends Couche
 {
 
     @Override
-    public String traite(Requete donnees)
+    public void traite(Requete donnees)
     {
         if(prochaine_couche instanceof CouchePhysique)
         {
             //TODO: Traitement de la couche actuelle
 
+            System.out.println("Couche Liaison --> Couche Physique");
             prochaine_couche.traite(donnees);
-            return "Couche Liaison --> Couche Physique\n" + prochaine_couche.traite(donnees);
         }
         else if(prochaine_couche instanceof CoucheTransport)
         {
             //TODO: Traitement de la couche actuelle
 
+            System.out.println("Couche Liaison --> Couche Transport");
             prochaine_couche.traite(donnees);
-            return "Couche Liaison --> Couche Transport\n" + prochaine_couche.traite(donnees);
         }
-
-        return "Couche Liaison : traitement impossible";
+        else
+        {
+            System.err.println("Couche Liaison : traitement impossible");
+        }
     }
 }
