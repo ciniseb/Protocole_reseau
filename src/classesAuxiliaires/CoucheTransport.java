@@ -50,7 +50,7 @@ public class CoucheTransport extends Couche
 
         //Envoie du nom de fichier
         Segment titre = new Segment((byte) 0, (byte) 0, (byte) (nb_segments-1), NOM_FICHIER.getBytes());
-        prochaine_couche.traite(new Requete(titre.getSegment()));
+        //prochaine_couche.traite(new Requete(titre.getSegment()));
 
         for (int i = 0; i < nb_segments; i++)
         {
@@ -61,7 +61,7 @@ public class CoucheTransport extends Couche
             segments[i][2] = (byte) (nb_segments-1); // Byte de séquence
             System.arraycopy(donnees, i * NB_MAX_OCTETS, segments[i], 3, taille_segment);
 
-            prochaine_couche.traite(new Requete(segments[i]));
+            //prochaine_couche.traite(new Requete(segments[i]));
         }
     }
 

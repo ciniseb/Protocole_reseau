@@ -7,40 +7,42 @@ import java.util.Arrays;
 
 public class Requete
 {
-    private byte[] donnees;
+    private String donnees;
 
-    public Requete(byte[] donnees)
+    public Requete(String donnees)
     {
-        setBytes(donnees);
+        setString(donnees);
     }
 
-    public void setString(String texte)
+    public void setString(String donnees)
     {
-        this.donnees = texte.getBytes();
+        this.donnees = donnees;
     }
 
     public void setBytes(byte[] octets)
     {
-        this.donnees = octets;;
+        this.donnees = new String(octets);;
     }
 
     public void setPaquet(DatagramPacket paquet)
     {
-        this.donnees = paquet.getData();
+        this.donnees = new String(paquet.getData(), 0, paquet.getLength());
     }
 
     public String getString()
     {
-        return new String(donnees);
+        return donnees;
     }
 
     public byte[] getBytes()
     {
-        return donnees;
+        return donnees.getBytes();
     }
 
     public DatagramPacket getPaquet()
     {
+        byte[] sendData = getBytes();
+
         //TODO: analyse des données pour les adresses, etc
 
         try
@@ -48,7 +50,7 @@ public class Requete
             int port = 25001; //Temporaire
             InetAddress adresseIP_receveur = InetAddress.getByName("localhost"); //Temporaire
 
-            return new DatagramPacket(donnees, donnees.length, adresseIP_receveur, port);
+            return new DatagramPacket(sendData, sendData.length, adresseIP_receveur, port);
         } catch (UnknownHostException e)
         {
             throw new RuntimeException(e);
