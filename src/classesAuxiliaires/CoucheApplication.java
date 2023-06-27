@@ -11,8 +11,6 @@ public class CoucheApplication extends Couche
     {
         if(prochaine_couche instanceof CoucheTransport)
         {
-            //TODO: Traitement de la couche actuelle
-
             FileInputStream fileInputStream = null;
             try
             {
