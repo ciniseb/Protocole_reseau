@@ -14,17 +14,17 @@ public class CoucheApplication extends Couche
             FileInputStream fileInputStream = null;
             try
             {
-                File file = new File(nom_fichier);
+                File file = new File(NOM_FICHIER);
 
                 if (!file.exists())
                 {
                     if (!file.createNewFile())
                     {
-                        System.out.println("Création impossible du fichier : " + nom_fichier);
+                        System.out.println("Création impossible du fichier : " + NOM_FICHIER);
                     }
                 }
 
-                fileInputStream = new FileInputStream(nom_fichier);
+                fileInputStream = new FileInputStream(NOM_FICHIER);
                 donnees.setBytes(fileInputStream.readAllBytes());
                 fileInputStream.close();
             } catch (IOException e)
@@ -40,7 +40,7 @@ public class CoucheApplication extends Couche
             FileOutputStream fileOutputStream = null;
             try
             {
-                fileOutputStream = new FileOutputStream(nom_fichier); //TODO: temporaire
+                fileOutputStream = new FileOutputStream(NOM_FICHIER); //TODO: temporaire
                 donnees.setString(donnees.getString() + " (Sortie)");
                 fileOutputStream.write(donnees.getBytes());
                 fileOutputStream.close();

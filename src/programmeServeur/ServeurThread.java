@@ -21,10 +21,10 @@ public class ServeurThread extends Thread
     public void run()
     {
         // Création des couches
-        CouchePhysique c_physique = new CouchePhysique();
-        CoucheLiaison c_liaison = new CoucheLiaison();
-        CoucheTransport c_transport = new CoucheTransport();
-        CoucheApplication c_application = new CoucheApplication();
+        Couche c_physique = new CouchePhysique();
+        Couche c_liaison = new CoucheLiaison();
+        Couche c_transport = new CoucheTransport();
+        Couche c_application = new CoucheApplication();
 
         // Définition de la chaîne de responsabilité
         c_physique.setProchaineCouche(c_liaison);

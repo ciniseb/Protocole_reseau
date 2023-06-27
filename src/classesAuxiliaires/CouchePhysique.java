@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import static classesAuxiliaires.Constantes.adresseIP_destination;
+import static classesAuxiliaires.Constantes.ADRESSE_IP_DESTINATION;
 
 public class CouchePhysique extends Couche
 {
@@ -43,7 +43,7 @@ public class CouchePhysique extends Couche
             {
 
                 // Création du socket
-                DatagramSocket socket = new DatagramSocket(adresseIP_destination); //TODO: temporaire
+                DatagramSocket socket = new DatagramSocket(ADRESSE_IP_DESTINATION); //TODO: temporaire
 
                 // Attente de réception d'un paquet
                 byte[] donnees_bytes_reception = new byte[1600];

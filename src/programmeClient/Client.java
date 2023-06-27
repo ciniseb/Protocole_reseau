@@ -9,10 +9,10 @@ public class Client
     public static void main(String[] args) throws IOException
     {
         // Création des couches
-        CoucheApplication c_application = new CoucheApplication();
-        CoucheTransport c_transport = new CoucheTransport();
-        CoucheLiaison c_liaison = new CoucheLiaison();
-        CouchePhysique c_physique = new CouchePhysique();
+        Couche c_application = new CoucheApplication();
+        Couche c_transport = new CoucheTransport();
+        Couche c_liaison = new CoucheLiaison();
+        Couche c_physique = new CouchePhysique();
 
         // Définition de la chaîne de responsabilité
         c_application.setProchaineCouche(c_transport);
