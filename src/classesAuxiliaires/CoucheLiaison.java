@@ -21,10 +21,6 @@ public class CoucheLiaison extends Couche
 
             paquetTransmit ++;
 
-            System.out.println("Couche Liaison --> Couche Physique");
-            prochaine_couche.traite(donnees);
-
-
             try {
                 // Create a file handler to write log messages to a file
                 FileHandler fileHandler = new FileHandler("liaisonDeDonne.log");
@@ -41,9 +37,11 @@ public class CoucheLiaison extends Couche
                 e.printStackTrace();
             }
 
-            return "Couche Liaison --> Couche Physique\n" + prochaine_couche.traite(donnees);
+            System.out.println("Couche Liaison --> Couche Physique");
+            prochaine_couche.traite(donnees);
         }
-        else if(prochaine_couche instanceof CoucheTransport) {
+        else if(prochaine_couche instanceof CoucheTransport)
+        {
 
             if(verifierCRC(donnees.getBytes(), POLYNOMIAL))
             {
@@ -74,8 +72,8 @@ public class CoucheLiaison extends Couche
                 e.printStackTrace();
             }
 
-                prochaine_couche.traite(donnees);
-                return "Couche Liaison --> Couche Transport\n" + prochaine_couche.traite(donnees);
+            System.out.println("Couche Liaison --> Couche Transport");
+            prochaine_couche.traite(donnees);
         }
         else
         {

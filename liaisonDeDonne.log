@@ -2,10 +2,10 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2023-06-27T16:06:15.385375800Z</date>
-  <millis>1687881975385</millis>
-  <nanos>375800</nanos>
-  <sequence>4</sequence>
+  <date>2023-06-27T16:15:11.473994100Z</date>
+  <millis>1687882511473</millis>
+  <nanos>994100</nanos>
+  <sequence>0</sequence>
   <logger>classesAuxiliaires.CoucheLiaison</logger>
   <level>INFO</level>
   <class>classesAuxiliaires.CoucheLiaison</class>
