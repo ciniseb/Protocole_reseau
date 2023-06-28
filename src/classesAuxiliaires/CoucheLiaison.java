@@ -4,10 +4,12 @@ import java.util.zip.CRC32;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+import static classesAuxiliaires.Constantes.LOGGER;
+import static classesAuxiliaires.Constantes.POLYNOMIAL;
+
 
 public class CoucheLiaison extends Couche
 {
-    private static final Logger LOGGER = Logger.getLogger(CoucheLiaison.class.getName());
     int erreurCRC = 0;
     int paquetTransmit = 0;
     int paquetRecut = 0;
@@ -24,19 +26,17 @@ public class CoucheLiaison extends Couche
 
             paquetTransmit ++;
 
-            try {
-                // Create a file handler to write log messages to a file
-                FileHandler Handler = new FileHandler("liaisonDeDonne.log");
+            try
+            {
+                FileHandler fileHandler = new FileHandler("liaisonDeDonneEnvoie.log");
 
-                // Set the file handler for the logger
-                LOGGER.addHandler(Handler);
-
+                LOGGER.addHandler(fileHandler);
 
                 LOGGER.info("Le client à envoyé un message");
 
-                // Close the file handler
-                Handler.close();
-            } catch (Exception e) {
+                fileHandler.close();
+            } catch (Exception e)
+            {
                 e.printStackTrace();
             }
 
@@ -59,21 +59,22 @@ public class CoucheLiaison extends Couche
                 paquetPerdu = paquetTransmit- paquetRecut;
 
 
-            try {
-                // Create a file handler to write log messages to a file
-                FileHandler Handler = new FileHandler("liaisonDeDonne.log");
+            try
+            {
+                FileHandler fileHandler = new FileHandler("liaisonDeDonneReception.log");
 
-                // Set the file handler for the logger
-                LOGGER.addHandler(Handler);
+                LOGGER.addHandler(fileHandler);
 
 
                 LOGGER.info("Le serveur à reçut des données");
 
-                // Close the file handler
-                Handler.close();
-            } catch (Exception e) {
+                fileHandler.close();
+            } catch (Exception e)
+            {
                 e.printStackTrace();
             }
+
+            //TODO : retirer l'en-tête
 
             System.out.println("Couche Liaison --> Couche Transport");
             prochaine_couche.traite(donnees);

@@ -2,15 +2,15 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2023-06-27T16:06:15.382784800Z</date>
-  <millis>1687881975382</millis>
-  <nanos>784800</nanos>
-  <sequence>3</sequence>
+  <date>2023-06-27T17:06:11.831967600Z</date>
+  <millis>1687885571831</millis>
+  <nanos>967600</nanos>
+  <sequence>0</sequence>
   <logger>classesAuxiliaires.CoucheLiaison</logger>
   <level>INFO</level>
   <class>classesAuxiliaires.CoucheLiaison</class>
   <method>traite</method>
-  <thread>1</thread>
-  <message>Le client à envoyé un message</message>
+  <thread>24</thread>
+  <message>Le serveur à reçut des données</message>
 </record>
 </log>

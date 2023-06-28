@@ -4,10 +4,10 @@ import java.nio.ByteBuffer;
 
 public class Segment
 {
-    byte index_premier;
-    byte index;
-    byte index_dernier;
-    byte[] donnees;
+    private final byte index_premier;
+    private final byte index;
+    private final byte index_dernier;
+    private final byte[] donnees;
 
     public Segment(byte index_premier, byte index, byte index_dernier, byte[] donnees)
     {
