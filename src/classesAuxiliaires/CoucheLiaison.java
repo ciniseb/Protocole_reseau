@@ -12,6 +12,9 @@ public class CoucheLiaison extends Couche
     int paquetTransmit = 0;
     int paquetRecut = 0;
     int paquetPerdu =0;
+    private static final int POLYNOME = 0xEDB88320;
+
+
     @Override
     public void traite(Requete donnees)
     {
@@ -23,16 +26,16 @@ public class CoucheLiaison extends Couche
 
             try {
                 // Create a file handler to write log messages to a file
-                FileHandler fileHandler = new FileHandler("liaisonDeDonne.log");
+                FileHandler Handler = new FileHandler("liaisonDeDonne.log");
 
                 // Set the file handler for the logger
-                LOGGER.addHandler(fileHandler);
+                LOGGER.addHandler(Handler);
 
 
                 LOGGER.info("Le client à envoyé un message");
 
                 // Close the file handler
-                fileHandler.close();
+                Handler.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -43,7 +46,7 @@ public class CoucheLiaison extends Couche
         else if(prochaine_couche instanceof CoucheTransport)
         {
 
-            if(verifierCRC(donnees.getBytes(), POLYNOMIAL))
+            if(verifierCRC(donnees.getBytes(), POLYNOME))
             {
                 erreurCRC++;
             }
@@ -58,16 +61,16 @@ public class CoucheLiaison extends Couche
 
             try {
                 // Create a file handler to write log messages to a file
-                FileHandler fileHandler = new FileHandler("liaisonDeDonne.log");
+                FileHandler Handler = new FileHandler("liaisonDeDonne.log");
 
                 // Set the file handler for the logger
-                LOGGER.addHandler(fileHandler);
+                LOGGER.addHandler(Handler);
 
 
                 LOGGER.info("Le serveur à reçut des données");
 
                 // Close the file handler
-                fileHandler.close();
+                Handler.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -81,29 +84,25 @@ public class CoucheLiaison extends Couche
         }
     }
 
-
-    private static final int POLYNOMIAL = 0xEDB88320;
-
-    public static byte[] calculerCRC(byte[] data) {
-        CRC32 crc32 = new CRC32();
-        crc32.update(data);
-        long crcValue = crc32.getValue();
-        byte[] crcBytes = new byte[4];
-        crcBytes[0] = (byte) ((crcValue >>> 24) & 0xFF);
-        crcBytes[1] = (byte) ((crcValue >>> 16) & 0xFF);
-        crcBytes[2] = (byte) ((crcValue >>> 8) & 0xFF);
-        crcBytes[3] = (byte) (crcValue & 0xFF);
-        System.out.print(crcBytes);
-        return crcBytes;
+    public static byte[] calculerCRC(byte[] donnees) {
+        CRC32 crc = new CRC32();
+        crc.update(donnees);
+        long valeurCrc = crc.getValue();
+        byte[] crcTable = new byte[4];
+        crcTable[0] = (byte) ((valeurCrc >>> 24) & 0xFF);
+        crcTable[1] = (byte) ((valeurCrc >>> 16) & 0xFF);
+        crcTable[2] = (byte) ((valeurCrc >>> 8) & 0xFF);
+        crcTable[3] = (byte) (valeurCrc & 0xFF);
+        return crcTable;
     }
 
-    public static boolean verifierCRC(byte[] data, long crc) {
+    public static boolean verifierCRC(byte[] donnees, long crc) {
         crc ^= 0xFFFFFFFF;
-        for (byte b : data) {
+        for (byte b : donnees) {
             crc ^= b;
             for (int i = 0; i < 8; i++) {
                 if ((crc & 1) == 1) {
-                    crc = (crc >>> 1) ^ POLYNOMIAL;
+                    crc = (crc >>> 1) ^ POLYNOME;
                 } else {
                     crc >>>= 1;
                 }
